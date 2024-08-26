@@ -1,6 +1,4 @@
-package com.example.projectcanyouhackit
-
-
+package com.example.canyouhackit3
 
 import android.app.Application
 import android.content.Intent
