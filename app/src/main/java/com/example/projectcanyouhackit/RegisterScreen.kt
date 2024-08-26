@@ -1,7 +1,5 @@
 package com.example.projectcanyouhackit
 
-
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,27 +31,27 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalMaterial3Api::class)
-
 @Composable
 fun RegisterScreen(navController: NavHostController) {
-    var email by remember { mutableStateOf(" ") }
-    var name by remember { mutableStateOf(" ") }
-    var password by remember { mutableStateOf(" ") }
-    var number by remember { mutableStateOf(" ") }
-    var passwordVisibility by remember { mutableStateOf(false) }
+    var email by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var number by remember { mutableStateOf("") }
+    var message by remember { mutableStateOf("") }
+    val auth = FirebaseAuth.getInstance()
+
     Column(
         modifier = Modifier
-
             .fillMaxSize()
             .background(color = Color(0xFF1B1B1B))
     ) {
-        Image(painter = painterResource(id = R.drawable.purple_flower_image_2), contentDescription =" ", modifier = Modifier.width(500.dp) )
+        Image(painter = painterResource(id = R.drawable.purple_flower_image_2), contentDescription = " ", modifier = Modifier.width(500.dp))
         Spacer(modifier = Modifier.height(20.dp))
         Column(
             verticalArrangement = Arrangement.Center,
@@ -61,34 +59,26 @@ fun RegisterScreen(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = Color(0xFF1B1B1B))
-        ){
-            Text(text = " New User ?", fontSize = 40.sp, fontStyle = FontStyle.Italic, color = Color(0xFFD3B1F7))
-            Text(text = " Sign Up", fontSize = 40.sp, fontStyle = FontStyle.Italic, color = Color(0xFFD3B1F7))
+        ) {
+            Text(text = "New User?", fontSize = 40.sp, fontStyle = FontStyle.Italic, color = Color(0xFFD3B1F7))
+            Text(text = "Sign Up", fontSize = 40.sp, fontStyle = FontStyle.Italic, color = Color(0xFFD3B1F7))
             Spacer(modifier = Modifier.height(20.dp))
-            TextField(value = name,
-                onValueChange = {
-                    name = it
-                },
-                label={ Text(text = "ENTER YOUR NAME")},
-                leadingIcon = {
-                    Icon(painter = painterResource(id = R.drawable.baseline_person_24), contentDescription = null )
-
-                },
+            TextField(
+                value = name,
+                onValueChange = { name = it },
+                label = { Text(text = "ENTER YOUR NAME") },
+                leadingIcon = { Icon(painter = painterResource(id = R.drawable.baseline_person_24), contentDescription = null) },
                 trailingIcon = {
-                    if(name.isNotEmpty()){
-                        Icon(painter = painterResource(id = R.drawable.baseline_close_24), contentDescription =null )
+                    if (name.isNotEmpty()) {
+                        Icon(painter = painterResource(id = R.drawable.baseline_close_24), contentDescription = null)
                     }
-
                 },
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Next
-                ),
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 singleLine = true,
                 colors = TextFieldDefaults.textFieldColors(
                     focusedIndicatorColor = Color.Blue,
                     focusedLeadingIconColor = Color.Blue,
                     containerColor = Color.White
-
                 ),
                 textStyle = TextStyle(
                     color = Color.Blue,
@@ -97,91 +87,74 @@ fun RegisterScreen(navController: NavHostController) {
                 )
             )
             Spacer(modifier = Modifier.height(20.dp))
-
-
-            TextField(value = email, onValueChange = {
-                email=it
-            },
-                label={ Text(text = "ENTER YOUR EMAIL")}
-                , leadingIcon = {
-                    Icon(painter = painterResource(id = R.drawable.baseline_person_24), contentDescription = null )
-
-                },
+            TextField(
+                value = email,
+                onValueChange = { email = it },
+                label = { Text(text = "ENTER YOUR EMAIL") },
+                leadingIcon = { Icon(painter = painterResource(id = R.drawable.baseline_person_24), contentDescription = null) },
                 trailingIcon = {
-                    if(name.isNotEmpty()){
-                        Icon(painter = painterResource(id = R.drawable.baseline_close_24), contentDescription =null )
+                    if (email.isNotEmpty()) {
+                        Icon(painter = painterResource(id = R.drawable.baseline_close_24), contentDescription = null)
                     }
-
                 },
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Next
-                ),
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 singleLine = true,
                 colors = TextFieldDefaults.textFieldColors(
                     focusedIndicatorColor = Color.Blue,
                     focusedLeadingIconColor = Color.Blue,
                     containerColor = Color.White
-
                 ),
                 textStyle = TextStyle(
                     color = Color.Blue,
                     fontWeight = FontWeight.Bold,
-
                     fontSize = 20.sp
-                ), modifier = Modifier.background(color = Color.Yellow))
-            Spacer(modifier = Modifier.height(20.dp))
-            TextField(value = password, onValueChange = {password = it},
-                label={ Text(text = "CREATE PASSWORD")},
-                leadingIcon = {
-                    Icon(painter = painterResource(id = R.drawable.baseline_password_24), contentDescription = null )
-
-                },
-                trailingIcon = {
-                    if(password.isNotEmpty()){
-                        val visibility = if (passwordVisibility){
-                            painterResource(id = R.drawable.baseline_visibility_24)
-                        } else {
-                            painterResource(id = R.drawable.baseline_close_24)
-                        }
-                        Icon(painter = visibility, contentDescription = if (passwordVisibility){
-                            "Hide Password "
-                        }else{
-                            "Show Password"
-                        }
-
-                        )
-
-                    }
-
-
-                },
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Next
                 ),
+                modifier = Modifier.background(color = Color.Yellow)
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            TextField(
+                value = password,
+                onValueChange = { password = it },
+                label = { Text(text = "CREATE PASSWORD") },
+                leadingIcon = { Icon(painter = painterResource(id = R.drawable.baseline_password_24), contentDescription = null) },
+                trailingIcon = {
+                    if (password.isNotEmpty()) {
+                        Icon(painter = painterResource(id = R.drawable.baseline_close_24), contentDescription = null)
+                    }
+                },
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 singleLine = true,
                 colors = TextFieldDefaults.textFieldColors(
                     focusedIndicatorColor = Color.Blue,
                     focusedLeadingIconColor = Color.Blue,
                     containerColor = Color.White
-
                 ),
                 textStyle = TextStyle(
                     color = Color.Blue,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
-
             )
             Spacer(modifier = Modifier.height(20.dp))
-
-            Button(onClick = { navController.navigate(Grides.route) },
+            Button(
+                onClick = {
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                message = "Registration successful"
+                                navController.navigate(Login.route)
+                            } else {
+                                message = "Registration failed: ${task.exception?.message}"
+                            }
+                        }
+                },
                 shape = RoundedCornerShape(20.dp),
-                colors = ButtonDefaults.buttonColors(Color(0xFFD3B1F7))) {
+                colors = ButtonDefaults.buttonColors(Color(0xFFD3B1F7))
+            ) {
                 Text(text = "Click Here To Sign Up", color = Color(0xFF1B1B1B))
             }
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(text = message, color = Color.White)
         }
-
-
-
     }
 }

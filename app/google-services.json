@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "108062631531",
+    "project_id": "synapsenote-1e572",
+    "storage_bucket": "synapsenote-1e572.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108062631531:android:b74435856473eedd57732e",
+        "android_client_info": {
+          "package_name": "com.example.projectcanyouhackit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANK77HgxwCfA-AIj6YR6_ESEJ2-v-NtK4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
